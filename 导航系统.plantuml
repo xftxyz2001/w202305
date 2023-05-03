@@ -1,0 +1,50 @@
+@startuml 导航系统
+class Map {
+    - roads: Road[]
+    - intersections: Intersection[]
+}
+
+class Road {
+    - start: Intersection
+    - end: Intersection
+    - length: int
+    - speedLimit: int
+}
+
+class Intersection {
+    - id: int
+    - coordinates: Coordinate
+}
+
+class Coordinate {
+    - latitude: double
+    - longitude: double
+}
+
+class Route {
+    - steps: Step[]
+}
+
+class Step {
+    - distance: int
+    - time: int
+    - description: String
+    - maneuver: Maneuver
+}
+
+enum Maneuver {
+    LEFT,
+    RIGHT,
+    STRAIGHT
+}
+
+class GPSData {
+    - position: Coordinate
+    - direction: int
+}
+Map "1" *-- "*" Road
+Map "1" *-- "*" Intersection
+Road "1" -- "1" Intersection
+Step "1" -- "1" Maneuver
+GPSData "1" -- "1" Coordinate
+@enduml
